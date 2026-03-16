@@ -4,6 +4,6 @@ services:
     container_name: ascii
     restart: unless-stopped
     ports:
-      - "127.0.0.1:8090:8080"
+      - "127.0.0.1:8768:8080"
     mem_limit: 32m
     cpus: 0.1
