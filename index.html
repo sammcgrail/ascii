@@ -22,24 +22,26 @@
   #controls {
     display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 8px 16px;
+    gap: 8px;
+    padding: 8px 12px;
     background: #111;
     border-bottom: 1px solid #222;
     flex-shrink: 0;
     z-index: 10;
+    flex-wrap: wrap;
   }
 
   #controls button {
     background: #1a1a1a;
     color: #00ff41;
     border: 1px solid #333;
-    padding: 6px 16px;
+    padding: 6px 12px;
     font-family: 'Courier New', monospace;
-    font-size: 14px;
+    font-size: 13px;
     cursor: pointer;
     border-radius: 3px;
     transition: background 0.15s;
+    flex-shrink: 0;
   }
 
   #controls button:hover {
@@ -60,14 +62,21 @@
   }
 
   #controls input[type="range"] {
-    width: 100px;
+    width: 80px;
     accent-color: #00ff41;
   }
 
   #controls .info {
-    font-size: 12px;
+    font-size: 11px;
     color: #555;
     margin-left: auto;
+  }
+
+  @media (max-width: 500px) {
+    #controls { gap: 6px; padding: 6px 8px; }
+    #controls button { padding: 8px 10px; font-size: 12px; }
+    #controls label { font-size: 11px; }
+    #controls .info { width: 100%; margin-left: 0; font-size: 10px; }
   }
 
   #grid-container {
@@ -99,7 +108,7 @@
 <body>
 
 <div id="controls">
-  <button id="btn-play" class="active" title="Play/Pause (Space)">▶ Play</button>
+  <button id="btn-play" class="active" title="Play/Pause (Space)">⏸ Pause</button>
   <button id="btn-step" title="Step forward one generation (S)">Step</button>
   <button id="btn-clear" title="Clear the grid (C)">Clear</button>
   <button id="btn-random" title="Randomize grid (R)">Random</button>
@@ -349,13 +358,13 @@
   // --- Controls ---
   btnPlay.addEventListener('click', function() {
     running = !running;
-    btnPlay.textContent = running ? '▶ Play' : '⏸ Pause';
+    btnPlay.textContent = running ? '⏸ Pause' : '▶ Play';
     btnPlay.classList.toggle('active', running);
   });
 
   btnStep.addEventListener('click', function() {
     running = false;
-    btnPlay.textContent = '⏸ Pause';
+    btnPlay.textContent = '▶ Play';
     btnPlay.classList.remove('active');
     step();
     render();
